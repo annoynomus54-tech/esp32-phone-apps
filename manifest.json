@@ -1,0 +1,60 @@
+{
+  "store": "Trevor's App Store",
+  "apps": [
+    {
+      "id": "tipcalc",
+      "name": "Tip Calc",
+      "version": "1.0",
+      "author": "ESP32 Phone",
+      "description": "Work out the tip and total for a bill. Type the amount, pick 10, 15 or 20 percent.",
+      "icon": "money",
+      "color": "#2E7D32",
+      "url": "apps/tipcalc/app.ps",
+      "size": 839
+    },
+    {
+      "id": "dice",
+      "name": "Dice",
+      "version": "1.0",
+      "author": "ESP32 Phone",
+      "description": "Roll two dice. Keeps count of how many times you've rolled.",
+      "icon": "dice",
+      "color": "#C62828",
+      "url": "apps/dice/app.ps",
+      "size": 936
+    },
+    {
+      "id": "btc",
+      "name": "BTC Price",
+      "version": "1.0",
+      "author": "ESP32 Phone",
+      "description": "Live Bitcoin price in US dollars from Coinbase. Updates every minute.",
+      "icon": "bolt",
+      "color": "#EF6C00",
+      "url": "apps/btc/app.ps",
+      "size": 834
+    },
+    {
+      "id": "reaction",
+      "name": "Reaction",
+      "version": "1.0",
+      "author": "ESP32 Phone",
+      "description": "How fast are you? Wait for green, then tap. Remembers your best time.",
+      "icon": "timer",
+      "color": "#1565C0",
+      "url": "apps/reaction/app.ps",
+      "size": 1192
+    },
+    {
+      "id": "tally",
+      "name": "Tally",
+      "version": "1.0",
+      "author": "ESP32 Phone",
+      "description": "A tally counter that remembers the count even after the phone restarts.",
+      "icon": "check",
+      "color": "#6A1B9A",
+      "url": "apps/tally/app.ps",
+      "size": 593
+    }
+  ]
+}

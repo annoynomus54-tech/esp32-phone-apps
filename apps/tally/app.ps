@@ -1,0 +1,36 @@
+# Tally Counter - remembers the count even after a restart
+app title "Tally"
+
+on start
+  load saved, "count"
+  set count = num(saved)
+  call draw
+end
+
+sub draw
+  clear BLACK
+  text 160, 150, 4, WHITE, str(count), center
+  button plus, 40, 230, 240, 90, "+1", GREEN
+  button minus, 40, 335, 110, 50, "-1", DARKGREY
+  button reset, 170, 335, 110, 50, "RESET", RED
+end
+
+on tap plus
+  set count = count + 1
+  call save
+end
+on tap minus
+  if count > 0
+    set count = count - 1
+  end
+  call save
+end
+on tap reset
+  set count = 0
+  call save
+end
+
+sub save
+  save "count", str(count)
+  call draw
+end

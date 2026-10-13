@@ -1,0 +1,61 @@
+# Reaction Timer - wait for green, then tap as fast as you can
+app title "Reaction"
+
+on start
+  load best, "best"
+  set state = "idle"
+  call draw
+end
+
+sub draw
+  if state == "wait"
+    clear MAROON
+    text 160, 220, 4, WHITE, "WAIT...", center
+  elif state == "go"
+    clear GREEN
+    text 160, 220, 4, BLACK, "TAP NOW!", center
+  else
+    clear NAVY
+    text 160, 140, 4, WHITE, "REACTION", center
+    if state == "done"
+      text 160, 200, 4, YELLOW, ms + " ms", center
+    elif state == "early"
+      text 160, 200, 2, ORANGE, "Too soon! Wait for green.", center
+    end
+    if best != ""
+      text 160, 250, 2, LIGHTGREY, "Best: " + best + " ms", center
+    end
+    button startbtn, 60, 320, 200, 60, "START", DARKGREY
+  end
+end
+
+on tap startbtn
+  set state = "wait"
+  call draw
+  timer rand(1500, 4000)
+end
+
+on tick
+  timer 0
+  if state == "wait"
+    set state = "go"
+    set t0 = millis()
+    call draw
+  end
+end
+
+on touch
+  if state == "go"
+    set ms = millis() - t0
+    if best == "" or ms < num(best)
+      set best = str(ms)
+      save "best", best
+    end
+    set state = "done"
+    call draw
+  elif state == "wait"
+    timer 0
+    set state = "early"
+    call draw
+  end
+end

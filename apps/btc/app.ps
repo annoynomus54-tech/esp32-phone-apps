@@ -1,0 +1,44 @@
+# Bitcoin Price - shows a live price from Coinbase's public API
+app title "BTC Price"
+
+on start
+  set price = ""
+  set status = "Loading..."
+  call draw
+  call refresh
+  timer 60000
+end
+
+sub refresh
+  set status = "Updating..."
+  call draw
+  http price, "https://api.coinbase.com/v2/prices/BTC-USD/spot"
+end
+
+sub draw
+  clear BLACK
+  text 160, 90, 2, ORANGE, "BITCOIN (BTC-USD)", center
+  if price != ""
+    text 160, 170, 4, WHITE, "$" + fixed(num(price), 2), center
+  end
+  text 160, 230, 2, LIGHTGREY, status, center
+  button again, 60, 300, 200, 50, "REFRESH", DARKGREY
+end
+
+on http price
+  if http_code == 200
+    set price = json(http_body, "data.amount")
+    set status = "Updated " + time("%H:%M")
+  else
+    set status = "Error " + http_code
+  end
+  call draw
+end
+
+on tap again
+  call refresh
+end
+
+on tick
+  call refresh
+end

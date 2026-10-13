@@ -1,0 +1,51 @@
+# Dice - tap ROLL to throw two dice
+app title "Dice"
+
+on start
+  set a = 1
+  set b = 1
+  set rolls = 0
+  call draw
+end
+
+sub face
+  # draws die value v at x,y
+  round x, y, 110, 110, 16, WHITE
+  set c = BLACK
+  if v == 1 or v == 3 or v == 5
+    fillcircle x + 55, y + 55, 9, c
+  end
+  if v >= 2
+    fillcircle x + 28, y + 28, 9, c
+    fillcircle x + 82, y + 82, 9, c
+  end
+  if v >= 4
+    fillcircle x + 82, y + 28, 9, c
+    fillcircle x + 28, y + 82, 9, c
+  end
+  if v == 6
+    fillcircle x + 28, y + 55, 9, c
+    fillcircle x + 82, y + 55, 9, c
+  end
+end
+
+sub draw
+  clear rgb(0, 80, 40)
+  set x = 30
+  set y = 120
+  set v = a
+  call face
+  set x = 180
+  set v = b
+  call face
+  text 160, 270, 4, WHITE, "Total " + (a + b), center
+  text 160, 305, 2, LIGHTGREY, "Rolls: " + rolls, center
+  button roll, 60, 350, 200, 60, "ROLL", ORANGE
+end
+
+on tap roll
+  set a = rand(1, 6)
+  set b = rand(1, 6)
+  set rolls = rolls + 1
+  call draw
+end

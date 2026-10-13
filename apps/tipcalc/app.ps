@@ -1,0 +1,39 @@
+# Tip Calculator - a simple PhoneScript app
+app title "Tip Calc"
+
+on start
+  set bill = ""
+  set pct = 15
+  call draw
+end
+
+sub draw
+  clear BLACK
+  text 160, 70, 2, YELLOW, "TIP CALCULATOR", center
+  text 20, 105, 2, LIGHTGREY, "Bill amount"
+  input billbox, 20, 125, 280, 40, bill, "Tap to type the bill"
+  button p10, 20, 185, 85, 44, "10%", DARKGREY
+  button p15, 117, 185, 85, 44, "15%", DARKGREY
+  button p20, 215, 185, 85, 44, "20%", DARKGREY
+  text 160, 245, 2, WHITE, "Tip: " + pct + "%", center
+  set b = num(bill)
+  set tip = b * pct / 100
+  text 160, 285, 4, GREEN, "$" + fixed(tip, 2), center
+  text 160, 325, 2, LIGHTGREY, "Total: $" + fixed(b + tip, 2), center
+end
+
+on tap p10
+  set pct = 10
+  call draw
+end
+on tap p15
+  set pct = 15
+  call draw
+end
+on tap p20
+  set pct = 20
+  call draw
+end
+on input billbox
+  call draw
+end
